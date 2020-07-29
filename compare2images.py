@@ -22,10 +22,9 @@ print("SSIM : {}".format(score))
 # obtain the regions of the two input images that differ
 thresh = cv2.threshold(diff, 0, 255,
 	cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)[1]
-cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL,
+cnts, _ = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL,
 	cv2.CHAIN_APPROX_SIMPLE)
-cnts = cnts[0] if imutils.is_cv2() else cnts[1]
-
+# cnts = cnts[0] if imutils.is_cv2() else cnts[1]
 # loop over the contours
 for c in cnts:
 	# compute the bounding box of the contour and then draw the
@@ -45,7 +44,3 @@ plt.subplot(122)
 plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
 
 plt.show()
-
-
-
-
